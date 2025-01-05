@@ -1,14 +1,11 @@
+import pandas as pd
+import numpy as np
 import torch
 import torch.nn as nn
-import pandas as pd
-import argparse 
 from torch.utils.data import Dataset
-from torch.utils.data import DataLoader
 from torch_geometric.nn import GATConv
-from torch.nn.functional import l1_loss
 import torch.nn.functional as F
-import os
-import numpy as np
+
 
 class Model(nn.Module):
     def __init__(self, win_size,input_dim,hidden_dim,t_att_heads,gru_layers,heads,out_dim,device):
@@ -165,3 +162,27 @@ class PairNorm(nn.Module):
             rownorm_individual = (1e-6 + x.pow(2).sum(dim=1, keepdim=True)).sqrt()
             x = self.scale * x / rownorm_individual - col_mean
         return x
+
+def pairwise_ranking_loss(preds, labels, margin=0.1):
+    preds = preds.view(-1)
+    labels = labels.view(-1)
+    
+    assert preds.size() == labels.size()
+    # 创建一个矩阵，其中每个元素i,j都是预测值或标签差值
+    diff_preds = preds[None,:] - preds[:, None]
+    diff_labels = labels[None, :] - labels[:, None]
+    
+    # 使用几何余弦表示一致性，当预测的差值和真实标签的差值同号时，为1，否则为0
+    mask = (diff_preds * diff_labels < 0).type(torch.float32)
+    
+    # 对差值预测应用一个线性关系，并引入一个margin
+    hinge_loss = torch.nn.functional.relu(margin - diff_preds).pow(2)
+    
+    # 乘以mask以获得最后的损失，只有不一致的对才会有损失值
+    loss = mask * hinge_loss
+    return loss.sum()
+
+
+MSE_loss= nn.MSELoss()
+def combined_loss(preds,labels,alpha,beta,rank_margin):
+    return alpha*MSE_loss(preds,labels)+beta*pairwise_ranking_loss(preds,labels,rank_margin)
