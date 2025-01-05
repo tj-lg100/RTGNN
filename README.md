@@ -1,8 +1,6 @@
 # Relational Temporal Graph Neural Networks (RTGNN)
 
-## 1. Prepare you training data
-
-## 2. Train you model
+## 1. Train you model
 * Before training, make sure to change the parameters in `main.sh` .
 
  ``` config
@@ -34,7 +32,7 @@ gpu 1                # Specifies which GPU to use for training
   bash main.sh
   ```
 
-  ## 3. Citing
+  ## 2. Citing
 
 * If you find **RTGNN** is useful for your research, please consider citing the following papers:
 
