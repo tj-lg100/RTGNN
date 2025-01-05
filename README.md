@@ -37,5 +37,10 @@ gpu 1                # Specifies which GPU to use for training
 * If you find **RTGNN** is useful for your research, please consider citing the following papers:
 
   ``` latex
-  
+  @article{jia2025relat,
+  title={Graph-Driven Insights: Enhancing Stock Market Prediction with Relational Temporal Dynamics},
+  author={Renjun Jia, Kaiming Yang, Dawei Cheng, Li Han and Yuqi Liang},
+  journal={IEEE International Conference on Acoustics, Speech, and Signal Processing ({ICASSP})},
+  year={2025}
+}
   ```
