@@ -124,11 +124,6 @@ class StockDataset(Dataset):
             feature_slices.append([feature_data[i:i+self.win_size] for i in range(len(data)-self.win_size)])
             label_slices.append([label_data[i+self.win_size] for i in range(len(data)-self.win_size)])
         self.date=data['dt']
-
-        print(feature_slices)
-        print(feature_slices.shape)
-
-        input()
         
         feature_slices = np.transpose(np.array(feature_slices),(1,0,2,3))
         label_slices = np.transpose(np.array(label_slices),(1,0,2))
