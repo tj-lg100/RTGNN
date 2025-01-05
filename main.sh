@@ -1,0 +1,14 @@
+python main.py --win_size 30 \
+                    --dataset_name hs300 \
+                    --horizon 1 \
+                    --hidden_dim 128 \
+                    --out_dim 1 \
+                    --heads 4 \
+                    --alpha 1 \
+                    --beta 2e-5 \
+                    --epochs 60 \
+                    --t_att_heads 6 \
+                    --gru_layers 1 \
+                    --lr 2e-4 \
+                    --rank_margin 0.1 \
+                    --gpu 1 \
