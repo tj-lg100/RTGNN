@@ -41,6 +41,5 @@ gpu 1                # Specifies which GPU to use for training
   title={Graph-Driven Insights: Enhancing Stock Market Prediction with Relational Temporal Dynamics},
   author={Renjun Jia, Kaiming Yang, Dawei Cheng, Li Han and Yuqi Liang},
   journal={IEEE International Conference on Acoustics, Speech, and Signal Processing ({ICASSP})},
-  year={2025}
-}
+  year={2025}}
   ```
